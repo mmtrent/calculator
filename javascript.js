@@ -1,3 +1,8 @@
+let firstNum = "";
+let secondNum = "";
+let num = "";
+let operator = "";
+
 // take input from calculator button, and pass to combineDigits function
 const numButtons = document.querySelectorAll("button.numbers");
 numButtons.forEach((button) => 
@@ -6,39 +11,43 @@ numButtons.forEach((button) =>
 
 const operatorButtons = document.querySelectorAll("button.operators");
 operatorButtons.forEach((button) => 
-    button.addEventListener('click', () => operatorKey())
+    button.addEventListener('click', () => operatorKey(button.textContent))
 )
+
+const equalButton = document.querySelector("#equals");
+equalButton.addEventListener('click', () => calculateAndDisplay())
+
 
 const display = document.getElementById("display");
 
-
-let firstNum = "";
-let secondNum = "";
-let Num = "";
-
 function combineDigits(n) { // take input from calculator keyboard and concatenate digits and save as variable
     stringNum = n.toString(); //convert input to string
-    Num = Num + stringNum; // concatenate digits
-    Num = parseInt(Num); // convert back to int
-    display.textContent = Num; // return variable
+    num = num + stringNum; // concatenate digits
+    num = parseInt(num); // convert back to int
+    display.textContent = num; // return variable
+    if (operator) {
+        secondNum = num;
+    }
 }
 
-function operatorKey () { 
-    firstNum = Num;// when an operator key is pressed, store first number as variable,
-                    // store selected operator as variable for later calculation
-                    // prompt for second number
-
+function operatorKey (key) { 
+    firstNum = num; // when an operator key is pressed, store first number as variable,
+    operator = key; // store selected operator as variable for later calculation
+    num = ""; // prompt for second number
 }
 
-// const addButton = document.querySelector("#add");
-// addButton.addEventListener('click', () => add(firstNum, secondNum));
+const calculate = a => str => b => {switch(str) {
+    case '+': return a + b
+    case '-': return a - b
+    case '/': return a / b
+    case 'X': return a * b
+    default: return 'Invalid operation'
+  }}
 
-
-// operator functions: clear, change pos/neg, square root, divide,
-// multiply, subtract, add, equal
-function add(a, b) {
-    
-    display.textContent = a + b;
+function calculateAndDisplay() {
+    let result = calculate (firstNum) (operator) (secondNum)
+    display.textContent = result;
+    num = result;
+    secondNum = "";
+    operator = "";
 }
-
-
