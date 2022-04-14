@@ -3,6 +3,8 @@ let secondNum = "";
 let num = "";
 let operator = "";
 
+const display = document.getElementById("display");
+
 // take input from calculator button, and pass to combineDigits function
 const numButtons = document.querySelectorAll("button.numbers");
 numButtons.forEach((button) => 
@@ -17,8 +19,8 @@ operatorButtons.forEach((button) =>
 const equalButton = document.querySelector("#equals");
 equalButton.addEventListener('click', () => calculateAndDisplay())
 
-
-const display = document.getElementById("display");
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener('click', () => clear())
 
 function combineDigits(n) { // take input from calculator keyboard and concatenate digits and save as variable
     stringNum = n.toString(); //convert input to string
@@ -50,4 +52,12 @@ function calculateAndDisplay() {
     num = result;
     secondNum = "";
     operator = "";
+}
+
+function clear() {
+    firstNum = "";
+    secondNum = "";
+    num = "";
+    operator = "";
+    display.textContent = 0;
 }

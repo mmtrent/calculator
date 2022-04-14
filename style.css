@@ -55,3 +55,15 @@ button {
 #num0 {
     width: 105px;
 }
+
+.operators {
+    background-color:aquamarine;
+}
+
+#equals {
+    background-color:lightgreen;
+}
+
+#clear {
+    background-color: lightcoral;
+}
