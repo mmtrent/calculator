@@ -2,6 +2,7 @@ let firstNum = "";
 let secondNum = "";
 let num = "";
 let operator = "";
+let operatorSequence = 1;
 
 const display = document.getElementById("display");
 
@@ -33,9 +34,15 @@ function combineDigits(n) { // take input from calculator keyboard and concatena
 }
 
 function operatorKey (key) { 
+    if (operator) {
+        result = calculateAndDisplay();
+        display.textContent = result;
+    }
     firstNum = num; // when an operator key is pressed, store first number as variable,
     operator = key; // store selected operator as variable for later calculation
     num = ""; // prompt for second number
+
+
 }
 
 const calculate = a => str => b => {switch(str) {
@@ -52,6 +59,7 @@ function calculateAndDisplay() {
     num = result;
     secondNum = "";
     operator = "";
+    return result;
 }
 
 function clear() {
